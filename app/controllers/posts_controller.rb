@@ -21,6 +21,20 @@ class PostsController < ApplicationController
   def edit
   end
 
+  def likes
+    @user = current_user # before_action :authenticate_user, only: [:likes]
+    @post = Post.find(params[:id])
+    @user.like!(@post)
+    redirect_to :back, notice: "Liked this post successfully"
+  end
+
+  def unlikes
+    @user = current_user # before_action :authenticate_user, only: [:likes]
+    @post = Post.find(params[:id])
+    @user.unlike!(@post)
+    redirect_to :back, notice: "Unliked this post successfully!"
+  end
+
   # POST /posts
   # POST /posts.json
   def create
@@ -69,6 +83,6 @@ class PostsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:description, :user_id)
+      params.require(:post).permit(:description, :user_id, :image)
     end
 end

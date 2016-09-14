@@ -13,7 +13,26 @@
  *= require_tree .
  *= require_self
  */
-
- @import "materialize/components/color";
- $primary-color: color("purple", "lighten-2") !default;
+@import "font-awesome";
+@import "materialize/components/color";
+ $primary-color: #f78069 !default;
+ $link-color: #f78069 !default;
  @import 'materialize';
+
+ .brand-logo {
+   margin-left: 10px;
+ }
+
+#notice {
+  text-align: center;
+  color:#000;
+  margin-top:40px;
+}
+
+.fa-heart-o {
+  color:black;
+}
+
+.red {
+  color: red;
+}

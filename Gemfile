@@ -8,6 +8,12 @@ gem 'sqlite3'
 
 gem 'devise'
 gem 'materialize-sass'
+gem "paperclip", "~> 5.0.0"
+
+gem "socialization"
+gem "font-awesome-rails"
+
+
 # Use Puma as the app server
 gem 'puma', '~> 3.0'
 # Use SCSS for stylesheets

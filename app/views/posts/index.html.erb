@@ -1,29 +1,36 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Posts</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Description</th>
-      <th>User</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
+</br></br>
     <% @posts.each do |post| %>
-      <tr>
-        <td><%= post.description %></td>
-        <td><%= post.user %></td>
-        <td><%= link_to 'Show', post %></td>
-        <td><%= link_to 'Edit', edit_post_path(post) %></td>
-        <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+    <div class="row">
+      <div class="col l8 offset-l2">
+        <div class="card">
+          <div class="card-action">
+              <span class="card-title"><%= post.user.email %></span>
+            </div>
+          <div class="card-image">
+            <%= image_tag post.image %>
+          </div>
+          <div class="card-content">
+            <p class="left-align" style="font-weight:bold">Likes:  <span style="font-weight:lighter"><%= post.likers(User).count %></span></p>
 
-<br>
+            <p class="left-align" style="font-weight:bold">Likers: <span style="font-weight:lighter"> <% post.likers(User).count do |likers| %>,
+            <%= likers.email %><% end %></span></p>
+          </br>
+            <p class="description"><%= post.description %></p>
+          </div>
+          <div class="card-action">
+            <% if user_signed_in? %>
+            <% if current_user.likes?(post) %>
+            <%= link_to '<i class="fa fa-heart fa-3x"></i>'.html_safe, unlikes_path(post) %>
+            <% elsif %>
+            <%= link_to '<i class="fa fa-heart-o fa-3x"></i>'.html_safe, likes_path(post) %>
+            <% end %>
+            <% end %>
+          </div>
 
-<%= link_to 'New Post', new_post_path %>
+        </div>
+      </div>
+    </div>
+
+  <% end %>
